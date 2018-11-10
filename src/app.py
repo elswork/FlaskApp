@@ -1,6 +1,4 @@
-from flask import Flask
-from flask import request
-from flask import jsonify
+from flask import Flask, render_template, request, jsonify
 import datetime
 
 import utils
@@ -23,9 +21,15 @@ def show_details() :
            "<tr><td> Local Address </td> <td>" + utils.getlocaladdress() + "</td> </tr>" \
            "<tr><td> Remote Address </td> <td>" + request.remote_addr + "</td> </tr>" \
            "<tr><td> Server Hit </td> <td>" + str(hit.getServerHitCount()) + "</td> </tr>" \
+           "<tr><td> JSON </td> <td> <a href='/json'>JSON</a> </td> </tr>" \
+           "<tr><td> Joystick </td> <td> <a href='/joystick'>Joystick</a> </td> </tr>" \
            "</table>" + \
            "</body>" + \
            "</html>"
+
+@app.route('/joystick')
+def joystick():
+    return app.send_static_file('joystick.html')
 
 @app.route("/json")
 def send_json() :

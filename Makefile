@@ -1,5 +1,5 @@
-SNAME ?= FlaskApp
-NAME ?= elswork/FlaskApp
+SNAME ?= flaskapp
+NAME ?= elswork/flaskapp
 PORT ?= 5000:5000
 ARCH ?= amd64
 ARCH2 ?= arm32v7
@@ -32,5 +32,11 @@ manifest: ## Manifest the container
 	docker manifest push --purge $(NAME):`cat VERSION`
 	docker manifest create $(NAME):latest $(NAME):$(ARCH) $(NAME):$(ARCH2)
 	docker manifest push --purge $(NAME):latest
+run: ## Run the container
+	docker run -d -p $(PORT) --name my_$(SNAME) $(NAME):$(ARCH)
 start: ## Start the container
-	docker run -it -p $(NAME) $(NAME):$(ARCH)
+	docker start my_$(SNAME)
+stop: ## Stop the container
+	docker stop my_$(SNAME)
+delete: ## Delete the container
+	docker rm my_$(SNAME)

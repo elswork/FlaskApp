@@ -14,9 +14,9 @@ LABEL mantainer="Eloy Lopez <elswork@gmail.com>" \
     org.label-schema.version=$VERSION \
     org.label-schema.schema-version="1.0"
 
-RUN pip install flask
-
 COPY src /src/
+
+RUN pip install -r /src/requirements.txt
 
 EXPOSE 5000
 
