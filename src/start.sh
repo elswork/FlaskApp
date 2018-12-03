@@ -1,0 +1,1 @@
+GPIOZERO_PIN_FACTORY=pigpio PIGPIO_ADDR=192.168.1.64 python /src/app.py
